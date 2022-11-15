@@ -1,10 +1,18 @@
 package org.example;
 
+import org.example.abstractFactory.Car;
+import org.example.abstractFactory.CarFactory;
+import org.example.abstractFactory.FactoryProvider;
 import org.example.builder.Weapon;
 import org.example.builder.WeaponBuilder;
+import org.example.factory.Game;
+import org.example.factory.GameFactory;
+import org.example.factory.HaloGameCreator;
+import org.example.factory.ScrabbleGameCreator;
 import org.example.singleton.*;
 import org.example.singleton.exercises.Computer;
 import org.example.singleton.exercises.Engine;
+
 
 import java.util.ArrayList;
 
@@ -64,6 +72,50 @@ public class Main {
                 .withDamage(10)
                 .build();
         System.out.println(ak47.getDamage());
+
+
+        //Factory
+       // String type = "PC";
+       // GameFactory factory;
+       // if (type.equals("PC")){
+          //  factory = new HaloGameCreator();
+
+      //  }else if (type.equals("Board")){
+           // factory = new ScrabbleGameCreator();
+
+     //   }else{
+          //  throw  new RuntimeException("Unknown game type");
+      //  }
+
+      //  Game game = factory.create();
+      //  System.out.println(game);
+
+
+        //Abstract factory
+        //adds additional level of abstraction, more PC-s coming to play and dont interfere each other
+
+        String type = "Lexus";
+        CarFactory factory = new FactoryProvider().createFactory(type);
+        Car sedan = factory.createSedan();
+
+        System.out.println(sedan);
+
+
+        //exercise
+        // Create a singleton called Students.
+        //This singleton will store a list of students as strings,
+        //implements following things:
+        //when adding a student to a list
+        //we should have a method to add a student to the list
+        //and this method returns a boolean, true if addition is succesful, else if return false
+        // in order to succesfully add a student the student name be prefixed with
+        //either senior or junior (ex. senior james dashboard)
+        // adding a duplicate name is not allowed
+        //add a method to retrieve all the students with the prefix of senior
+        // add a method to retrieve all the students with a prefix of junior
+
+
+
 
     }
 }
