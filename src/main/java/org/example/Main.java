@@ -3,8 +3,14 @@ package org.example;
 import org.example.abstractFactory.Car;
 import org.example.abstractFactory.CarFactory;
 import org.example.abstractFactory.FactoryProvider;
+import org.example.adapter.Pupil;
+import org.example.adapter.PupilAdapter;
+import org.example.adapter.Student;
+import org.example.adapter.exercise.*;
 import org.example.builder.Weapon;
 import org.example.builder.WeaponBuilder;
+import org.example.builder.exercise.Employee;
+
 import org.example.factory.Game;
 import org.example.factory.GameFactory;
 import org.example.factory.HaloGameCreator;
@@ -12,9 +18,12 @@ import org.example.factory.ScrabbleGameCreator;
 import org.example.singleton.*;
 import org.example.singleton.exercises.Computer;
 import org.example.singleton.exercises.Engine;
+import org.example.singleton.exercises.User;
+import org.example.singleton.exercises.UserBuilder;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -115,7 +124,80 @@ public class Main {
         // add a method to retrieve all the students with a prefix of junior
 
 
+        //exercise
+        // create a user class having the following fields:
+        //firstname, lastname, age, email, phonenumber, aadress
+        //use the builder pattern to create a class called userbuilder
+        // that will be used to make the process of creating a new user easier
 
+        User user1 = new UserBuilder()
+                .withFirstName("Gina")
+                .withLastName("Acorn")
+                .withAge(34)
+                .withPhoneNumber("6789098765456")
+                .withEmail("mollu@volli.ee")
+                .withAddress("Tartu")
+                .build();
+        System.out.println(user1);
+
+
+        //ADAPTER pattern
+
+        Student ken = new PupilAdapter(new Pupil("Ken", "Derrick", "ken@mail.com", 20, List.of(3,5,4,3,1)));
+        System.out.println(ken.getFullName());
+        System.out.println(ken.isAdult());
+        System.out.println(ken.getResults());
+
+        Game doomII = new VideoGameAdapter( new VideoGame("doomII", 13, 400, 30));
+        System.out.println(doomII.canBePlayedRemotely());
+        System.out.println(doomII.getName());
+        System.out.println(doomII.getType());
+        System.out.println(doomII.canBePlayedRemotely());
+
+
+        //exercise
+        //create an class called videogame,
+        //methods: getPegiName(); - name
+        // getAgeRating(); - how old you have to be to play this
+        //coresNeeded(); - int
+        // pingTime(); - int
+        // videogame -> in order for canBePlayedRemotely to be valid:
+        //it must have a ping less than 100ms
+        // create an adapter to converts a video game to object into a game(pc game) object
+
+
+        // Create and object class called Employee and add the following fields:
+        // first name, last name, age, name of the Employer, phone number, email, salary
+        // Create a builder to handle the creation of the Employee object,
+        // as a static builder class in the Employee.java file
+
+        Employee kenny = new Employee.EmployeeBuilder()
+                .withFirstName("Kenny")
+                .withLastName("Loggins")
+                .withAge(34)
+                .withNameOfTheEmployer("Starbucks")
+                .withPhoneNumber("67890098756")
+                .withEmail("kenny@gmail.com")
+                .withSalary("1200$")
+                .build();
+        System.out.println(kenny);
+
+        // Create a target interface called Rectangle and it should have
+        // the following:
+        // - getWidth() - abstract method
+        // - getHeight() - abstract method
+        // getArea() - default method that should return the value of
+        // getWidth * getHeight
+        // Create a class called Square
+        // that has one field called side, which represents the length of a side of the square
+        // create and adapter that will allow us to use the Rectangle interface
+        // to find the width, height, and the area of the square
+
+        Rectangle square1 = new SquareAdapter(new Square (4.5d));
+        System.out.println(square1.getHeight());
+        System.out.println(square1.getWidth());
+        System.out.println(square1.getArea());
 
     }
+
 }
